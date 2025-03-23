@@ -1,13 +1,31 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function PendingReports() {
-  const reports = [
-    { date: "05/02/25", postedBy: "Animesh Cena" },
-    { date: "03/01/25", postedBy: "Divyam Orton" },
-    { date: "06/12/24", postedBy: "Keshav Jha" },
-  ];
+  const [reports, setReports] = useState([]);
+
+  // Fake function to simulate backend API call
+  const fetchPendingReports = async () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve([
+          { id: 1, date: "05/02/25", postedBy: "Animesh Cena" },
+          { id: 2, date: "03/01/25", postedBy: "Divyam Orton" },
+          { id: 3, date: "06/12/24", postedBy: "Keshav Jha" },
+        ]);
+      }, 1000);
+    });
+  };
+
+  useEffect(() => {
+    const getReports = async () => {
+      const data = await fetchPendingReports();
+      setReports(data);
+    };
+    getReports();
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
@@ -24,12 +42,14 @@ export default function PendingReports() {
             </tr>
           </thead>
           <tbody>
-            {reports.map((report, index) => (
-              <tr key={index} className="border-b">
+            {reports.map((report) => (
+              <tr key={report.id} className="border-b">
                 <td className="p-2 bg-gray-200">{report.date}</td>
                 <td className="p-2 bg-gray-200">{report.postedBy}</td>
                 <td className="p-2 bg-gray-200">
-                  <Link href="#" className="text-blue-500">View</Link>
+                  <Link href={`/dashboard/doctor/pending/${report.id}`} className="text-blue-500 hover:underline">
+                    View
+                  </Link>
                 </td>
               </tr>
             ))}

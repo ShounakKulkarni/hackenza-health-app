@@ -1,9 +1,11 @@
 "use client"
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function ProfilePatient() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -14,14 +16,39 @@ export default function ProfilePatient() {
     allergies: "",
     medical_records: ""
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Doctor Sign Up Data:", formData);
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fakeUpdateDoctorProfile(formData);
+      if (response.success) {
+        router.push("/dashboard/patient");
+      } else {
+        setError("Update failed. Please try again.");
+      }
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
+    }
+
+    setLoading(false);
+  };
+
+  const fakeUpdateDoctorProfile = async (data) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.log("Doctor Profile Updated:", data);
+        resolve({ success: true });
+      }, 1000);
+    });
   };
 
   return (
@@ -31,88 +58,39 @@ export default function ProfilePatient() {
           <Link href="/">
             <button className="text-2xl">⬅</button>
           </Link>
-          <h1 className="text-2xl font-bold text-gray-800">Patient Profile</h1>
+          <h1 className="text-2xl font-bold text-gray-800">Edit Patient Profile</h1>
           <div></div>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-          <div className="grid grid-cols-2 gap-4 text-left">
-            <div>
-              <label className="block text-gray-600">Name</label>
-              <input
-                type="text"
-                name="name"
-                className="p-3 border rounded-lg w-full"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-gray-600">Phone</label>
-              <input
-                type="text"
-                name="phone"
-                className="p-3 border rounded-lg w-full"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-gray-600">Age</label>
-              <input
-                type="text"
-                name="age"
-                className="p-3 border rounded-lg w-full"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-gray-600">Gender</label>
-              <input
-                type="text"
-                name="credentials"
-                className="p-3 border rounded-lg w-full"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-gray-600">Blood Group</label>
-              <input
-                type="text"
-                name="license"
-                className="p-3 border rounded-lg w-full"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-gray-600">Allergies</label>
-              <input
-                type="text"
-                name="specialization"
-                className="p-3 border rounded-lg w-full"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-gray-600">Medical History</label>
-              <input
-                type="text"
-                name="experience"
-                className="p-3 border rounded-lg w-full"
-                onChange={handleChange}
-                required
-              />
-            </div>
+        <div className="grid grid-cols-2 gap-4 text-left">
+            {[
+              { label: "Name", name: "name" },
+              { label: "Phone", name: "phone" },
+              { label: "Age", name: "age" },
+              { label: "Gender", name: "gender" },
+              { label: "Blood Group", name: "blood_grp" },
+              { label: "Allergies", name: "allergies" },
+              { label: "Medical Records", name: "medical_records" }
+            ].map((field) => (
+              <div key={field.name}>
+                <label className="block text-gray-600">{field.label}</label>
+                <input
+                  type="text"
+                  name={field.name}
+                  className="p-3 border rounded-lg w-full"
+                  onChange={handleChange}
+                />
+              </div>
+            ))}
           </div>
           <button
             type="submit"
             className="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition"
+            disabled={loading}
           >
-            Edit
+            {loading ? "Saving..." : "Save Changes"}
           </button>
+          {error && <p className="text-red-500 mt-2">{error}</p>}
         </form>
       </div>
     </div>
