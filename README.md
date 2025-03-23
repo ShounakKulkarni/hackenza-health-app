@@ -57,6 +57,7 @@ virtualenv env
 ### 2) cd to backend folder and run the following command to install all the dependencies-
 ```
 pip install -r requirements.txt
+Working:
 
 Working:
 
