@@ -1,35 +1,66 @@
-"use client"
+"use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
 
 export default function DoctorDashboard() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-[40rem] text-center">
-        <div className="flex justify-between items-center w-full mb-6 border-b pb-4">
-          <h1 className="text-3xl font-bold text-gray-800">Virtual Care</h1>
-          <button className="text-red-500 font-semibold hover:underline" onClick={() => router.push("/login")}>Logout</button>
+    <div
+      className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center p-6"
+      style={{ backgroundImage: "url('/img/background.jpg')" }}
+    >
+      <div className="bg-white p-10 rounded-2xl shadow-xl w-[50rem] text-center">
+        <div className="flex justify-between items-center w-full mb-8 border-b pb-6">
+          <h1 className="text-4xl font-bold text-gray-800">Virtual <span style={{ color: "#5680E9" }}>Care</span></h1>
+          <button
+            className="text-red-500 font-semibold hover:underline text-lg"
+            onClick={() => router.push("/login")}
+          >
+            Logout
+          </button>
         </div>
-        <div className="grid grid-cols-2 gap-6">
+
+        <div className="grid grid-cols-2 gap-8">
           <Link href="doctor/pending">
-            <div className="p-6 bg-blue-100 rounded-lg text-center cursor-pointer hover:bg-blue-200 shadow-md">
-              <img src="/icons/reports.png" alt="Pending Reports" className="mx-auto mb-2 w-12 h-12" />
-              <p className="text-lg font-semibold text-gray-700">Pending Reports</p>
+            <div
+              className="p-8 rounded-lg text-center cursor-pointer shadow-md transition transform hover:scale-105"
+              style={{ backgroundColor: "#5680E9" }}
+            >
+              <img
+                src="/img/report_icon.png"
+                alt="Pending Reports"
+                className="mx-auto mb-4 w-24 h-24"
+              />
+              <p className="text-xl font-semibold text-white">Pending Reports</p>
             </div>
           </Link>
-          <Link href="doctor/pending">
-            <div className="p-6 bg-green-100 rounded-lg text-center cursor-pointer hover:bg-green-200 shadow-md">
-              <img src="/icons/history.png" alt="Diagnosis History" className="mx-auto mb-2 w-12 h-12" />
-              <p className="text-lg font-semibold text-gray-700">Diagnosis History</p>
+
+          <Link href="doctor/history">
+            <div
+              className="p-8 rounded-lg text-center cursor-pointer shadow-md transition transform hover:scale-105"
+              style={{ backgroundColor: "#84CEEB" }}
+            >
+              <img
+                src="/img/history_icon.png"
+                alt="Diagnosis History"
+                className="mx-auto mb-4 w-24 h-24"
+              />
+              <p className="text-xl font-semibold text-white">Diagnosis History</p>
             </div>
           </Link>
+
           <Link href="doctor/profile" className="col-span-2">
-            <div className="p-6 bg-yellow-100 rounded-lg text-center cursor-pointer hover:bg-yellow-200 shadow-md">
-              <img src="/icons/profile.png" alt="Profile" className="mx-auto mb-2 w-12 h-12" />
-              <p className="text-lg font-semibold text-gray-700">Profile</p>
+            <div
+              className="p-8 rounded-lg text-center cursor-pointer shadow-md transition transform hover:scale-105"
+              style={{ backgroundColor: "#5AB9EA" }}
+            >
+              <img
+                src="/img/profile_icon.png"
+                alt="Profile"
+                className="mx-auto mb-4 w-24 h-28"
+              />
+              <p className="text-xl font-semibold text-white">Profile</p>
             </div>
           </Link>
         </div>

@@ -54,19 +54,22 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div
+      className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: "url('/img/background.jpg')" }}
+    >
       <div className="bg-white p-8 rounded-2xl shadow-xl w-96 text-center">
-        <div className="flex justify-center mb-4">
-          <img src="/cloud-health-icon.png" alt="Virtual Care" className="w-20 h-20" />
+      <div className="flex justify-center mb-4">
+          <img src="/img/main_logo.png" alt="Virtual Care" className="w-60 h-50" />
         </div>
         <h1 className="text-2xl font-bold text-gray-800 mb-4">
-          VIRTUAL <span className="text-teal-500">CARE</span>
+          VIRTUAL <span style={{ color: "#5680E9" }}>CARE</span>
         </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"
             placeholder="Email"
-            className="w-full p-3 border rounded-lg"
+            className="w-full p-3 border rounded-lg text-black placeholder-gray-500"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -74,14 +77,15 @@ export default function Login() {
           <input
             type="password"
             placeholder="Password"
-            className="w-full p-3 border rounded-lg"
+            className="w-full p-3 border rounded-lg text-black placeholder-gray-500"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
           <button
             type="submit"
-            className="w-full bg-teal-500 text-white py-2 rounded-lg font-semibold hover:bg-teal-600 transition"
+            className="w-full text-white py-2 rounded-lg font-semibold transition"
+            style={{ backgroundColor: "#5680E9" }}
             disabled={loading}
           >
             {loading ? "Logging in..." : "Login"}
@@ -93,13 +97,15 @@ export default function Login() {
           <div className="flex flex-col space-y-2">
             <button
               onClick={() => router.push("/signup/patient")}
-              className="mt-2 bg-blue-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-600 transition"
+              className="mt-2 text-white py-2 px-4 rounded-lg font-semibold transition"
+              style={{ backgroundColor: "#5AB9EA" }}
             >
               Sign Up as Patient
             </button>
             <button
               onClick={() => router.push("/signup/doctor")}
-              className="mt-2 bg-blue-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-600 transition"
+              className="mt-2 text-white py-2 px-4 rounded-lg font-semibold transition"
+              style={{ backgroundColor: "#5AB9EA" }}
             >
               Sign Up as Doctor
             </button>
