@@ -1,9 +1,14 @@
-import Image from "next/image";
+"use client"
+
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
-  return (
-    <>
-      
-    </>
-  ) 
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/login"); // Redirect to login page
+  }, []);
+
+  return null; // Render nothing while redirecting
 }

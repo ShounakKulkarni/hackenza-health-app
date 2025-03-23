@@ -11,7 +11,7 @@ export default function NewDiagnosis() {
   });
   const [response, setResponse] = useState(null);
   const [clinician, setClinician] = useState(null);
-  const [verified, setVerified] = useState("No"); // Default "No"
+  const [verified, setVerified] = useState("No");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -30,7 +30,7 @@ export default function NewDiagnosis() {
       const responseData = await fakeGetDiagnosisResponse();
       setResponse(responseData.response);
       setClinician(responseData.clinician);
-      setVerified("No"); // Still "No"
+      setVerified("No");
       setSubmitted(true);
     } catch (err) {
       setError("Something went wrong. Please try again.");
@@ -61,78 +61,105 @@ export default function NewDiagnosis() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-[40rem] text-center">
-        <div className="flex justify-between items-center w-full mb-6 border-b pb-4">
-          <h1 className="text-2xl font-bold text-gray-800">New Diagnosis</h1>
-        </div>
-        <div className="mb-4 text-left">
-          <label className="block font-semibold">Symptoms</label>
-          <textarea
-            name="symptoms"
-            className="w-full p-2 border rounded-lg"
-            placeholder="Enter symptoms..."
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-4 text-left">
-          <label className="block font-semibold">Severity</label>
-          <div className="flex gap-4">
-            {["Mild", "Moderate", "Severe"].map((level) => (
-              <label key={level}>
-                <input type="radio" name="severity" value={level} className="mr-1" onChange={handleChange} required/> {level}
-              </label>
-            ))}
+    <div
+      className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center p-8"
+      style={{ backgroundImage: "url('/img/background.jpg')" }}
+    >
+      <div className="bg-white p-10 rounded-2xl shadow-xl w-[40rem] text-black">
+        <h1 className="text-3xl font-bold mb-6 text-center border-b pb-4">New Diagnosis</h1>
+
+        <div className="space-y-4 text-left">
+          <div>
+            <label className="block font-semibold">Symptoms</label>
+            <textarea
+              name="symptoms"
+              className="w-full p-3 border rounded-lg bg-[#E3F7FE] text-black resize-none"
+              placeholder="Enter symptoms..."
+              onChange={handleChange}
+              required
+            />
           </div>
-        </div>
-        <div className="mb-4 text-left">
-          <label className="block font-semibold">Duration</label>
-          <input
-            type="text"
-            name="duration"
-            className="w-full p-2 border rounded-lg"
-            placeholder="Enter duration..."
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-4 text-left">
-          <label className="block font-semibold">Progress</label>
-          <div className="flex gap-4">
-            {["Improved", "Worsened", "Same"].map((status) => (
-              <label key={status}>
-                <input type="radio" name="progress" value={status} className="mr-1" onChange={handleChange} required/> {status}
-              </label>
-            ))}
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block font-semibold">Severity</label>
+              <select
+                name="severity"
+                className="w-full p-3 border rounded-lg bg-[#E3F7FE] text-black"
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select Severity</option>
+                <option value="Mild">Mild</option>
+                <option value="Moderate">Moderate</option>
+                <option value="Severe">Severe</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block font-semibold">Duration</label>
+              <input
+                type="text"
+                name="duration"
+                className="w-full p-3 border rounded-lg bg-[#E3F7FE] text-black"
+                placeholder="Enter duration..."
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block font-semibold">Progress</label>
+            <select
+              name="progress"
+              className="w-full p-3 border rounded-lg bg-[#E3F7FE] text-black"
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Progress</option>
+              <option value="Improved">Improved</option>
+              <option value="Worsened">Worsened</option>
+              <option value="Same">Same</option>
+            </select>
           </div>
         </div>
 
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <p className="text-red-500 mt-2">{error}</p>}
 
-        {!submitted && (
+        {!submitted ? (
           <button
             onClick={handleSubmit}
-            className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600"
+            className="w-full px-6 py-3 bg-[#5AB9EA] text-white font-semibold rounded-lg hover:bg-blue-600 mt-6"
             disabled={loading}
           >
             {loading ? "Submitting..." : "Submit"}
           </button>
-        )}
-
-        {submitted && (
-          <div>
-            <div className="mt-4 text-left">
+        ) : (
+          <div className="mt-6 space-y-4">
+            <div>
               <label className="block font-semibold">Response</label>
-              <textarea className="w-full p-2 border rounded-lg bg-gray-200" value={response || "Not Verified"} readOnly />
+              <textarea
+                className="w-full p-3 border rounded-lg bg-[#E3F7FE] text-black resize-none"
+                value={response || "Not Verified"}
+                readOnly
+              />
             </div>
-            <div className="mt-4 text-left">
+            <div>
               <label className="block font-semibold">Clinician Assigned</label>
-              <input className="w-full p-2 border rounded-lg bg-gray-200" value={clinician} readOnly />
+              <input
+                className="w-full p-3 border rounded-lg bg-[#E3F7FE] text-black"
+                value={clinician}
+                readOnly
+              />
             </div>
-            <div className="mt-4 text-left">
+            <div>
               <label className="block font-semibold">Verified</label>
-              <input className="w-full p-2 border rounded-lg bg-gray-200" value={verified} readOnly />
+              <input
+                className="w-full p-3 border rounded-lg bg-[#E3F7FE] text-black"
+                value={verified}
+                readOnly
+              />
             </div>
           </div>
         )}

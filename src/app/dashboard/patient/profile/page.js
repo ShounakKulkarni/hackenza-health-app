@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -14,7 +14,7 @@ export default function ProfilePatient() {
     blood_grp: "",
     email: "",
     allergies: "",
-    medical_records: ""
+    medical_records: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -52,46 +52,110 @@ export default function ProfilePatient() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-[40rem] text-center">
+    <div
+      className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: "url('/img/background.jpg')" }}
+    >
+      <div className="bg-white p-10 rounded-2xl shadow-xl w-[40rem] text-center">
         <div className="flex justify-between w-full">
           <Link href="/">
             <button className="text-2xl">⬅</button>
           </Link>
-          <h1 className="text-2xl font-bold text-gray-800">Edit Patient Profile</h1>
+          <h1 className="text-2xl font-bold text-gray-800">
+            Edit Patient Profile
+          </h1>
           <div></div>
         </div>
+
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-        <div className="grid grid-cols-2 gap-4 text-left">
+          <div className="grid grid-cols-2 gap-4 text-left">
             {[
-              { label: "Name", name: "name" },
-              { label: "Phone", name: "phone" },
-              { label: "Age", name: "age" },
-              { label: "Gender", name: "gender" },
-              { label: "Blood Group", name: "blood_grp" },
-              { label: "Allergies", name: "allergies" },
-              { label: "Medical Records", name: "medical_records" }
+              { label: "Name", name: "name", type: "text" },
+              { label: "Phone", name: "phone", type: "text" },
+              { label: "Age", name: "age", type: "text" },
             ].map((field) => (
               <div key={field.name}>
                 <label className="block text-gray-600">{field.label}</label>
                 <input
-                  type="text"
+                  type={field.type}
                   name={field.name}
-                  className="p-3 border rounded-lg w-full"
+                  className="p-3 border border-gray-400 rounded-lg w-full text-black placeholder-gray-500"
                   onChange={handleChange}
+                  required
                 />
               </div>
             ))}
+
+            {/* Gender Dropdown */}
+            <div>
+              <label className="block text-gray-600">Gender</label>
+              <select
+                name="gender"
+                className="p-3 border border-gray-400 rounded-lg w-full text-black placeholder-gray-500"
+                onChange={handleChange}
+                required
+              >
+                <option value=""></option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+
+            {/* Blood Group Dropdown */}
+            <div>
+              <label className="block text-gray-600">Blood Group</label>
+              <select
+                name="blood_grp"
+                className="p-3 border border-gray-400 rounded-lg w-full text-black placeholder-gray-500"
+                onChange={handleChange}
+                required
+              >
+                <option value=""></option>
+                {["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"].map(
+                  (group) => (
+                    <option key={group} value={group}>
+                      {group}
+                    </option>
+                  )
+                )}
+              </select>
+            </div>
+
+            {/* Allergies Field */}
+            <div>
+              <label className="block text-gray-600">Allergies</label>
+              <input
+                type="text"
+                name="allergies"
+                className="p-3 border border-gray-400 rounded-lg w-full text-black placeholder-gray-500"
+                onChange={handleChange}
+                required
+              />
+            </div>
           </div>
+
+          {/* Full-width Medical Records Field */}
+          <div className="text-left">
+            <label className="block text-gray-600">Medical Records</label>
+            <input
+              type="text"
+              name="medical_records"
+              className="p-3 border border-gray-400 rounded-lg w-full text-black placeholder-gray-500"
+              onChange={handleChange}
+              required
+            />
+          </div>
+
           <button
             type="submit"
-            className="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition"
+            className="w-full text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition"
+            style={{ backgroundColor: "#5AB9EA" }}
             disabled={loading}
           >
             {loading ? "Saving..." : "Save Changes"}
           </button>
-          {error && <p className="text-red-500 mt-2">{error}</p>}
         </form>
+        {error && <p className="text-red-500 mt-2">{error}</p>}
       </div>
     </div>
   );

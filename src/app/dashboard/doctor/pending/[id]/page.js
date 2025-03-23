@@ -52,44 +52,81 @@ export default function DiagnosisReport() {
     }
   };
 
-  if (loading) return <p className="text-center text-gray-500">Loading...</p>;
+  if (loading)
+    return <p className="text-center text-gray-500 text-lg">Loading...</p>;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-[40rem] text-center">
-        <div className="flex justify-between items-center w-full mb-6 border-b pb-4">
-          <h1 className="text-2xl font-bold text-gray-800">Diagnosis Report</h1>
+    <div
+      className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center p-8"
+      style={{ backgroundImage: "url('/img/background.jpg')" }}
+    >
+      <div className="p-10 rounded-2xl shadow-2xl w-[55rem] text-black bg-white">
+        <h1 className="text-4xl font-bold mb-6 border-b-2 pb-4 text-center">
+          Diagnosis Report
+        </h1>
+
+        <div className="space-y-6 text-left">
+          <div>
+            <label className="block font-semibold text-lg">Symptoms</label>
+            <textarea
+              className="w-full p-3 rounded-lg text-black bg-[#E3F7FE] resize-none"
+              value={diagnosis.symptoms}
+              readOnly
+              rows={3}
+            />
+          </div>
+
+          {/* Duration, Severity, and Progress Side by Side */}
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <label className="block font-semibold text-lg">Duration</label>
+              <input
+                className="w-full p-3 rounded-lg text-black bg-[#E3F7FE]"
+                value={diagnosis.duration}
+                readOnly
+              />
+            </div>
+            <div>
+              <label className="block font-semibold text-lg">Severity</label>
+              <input
+                className="w-full p-3 rounded-lg text-black bg-[#E3F7FE]"
+                value={diagnosis.severity}
+                readOnly
+              />
+            </div>
+            <div>
+              <label className="block font-semibold text-lg">Progress</label>
+              <input
+                className="w-full p-3 rounded-lg text-black bg-[#E3F7FE]"
+                value={diagnosis.progress}
+                readOnly
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block font-semibold text-lg">Response</label>
+            <textarea
+              className="w-full p-3 rounded-lg text-black bg-[#E3F7FE] resize-none"
+              value={diagnosis.response}
+              onChange={(e) => setDiagnosis({ ...diagnosis, response: e.target.value })}
+              rows={3}
+            />
+          </div>
+
+          <div>
+            <label className="block font-semibold text-lg">Clinician Assigned</label>
+            <input
+              className="w-full p-3 rounded-lg text-black bg-[#E3F7FE]"
+              value={diagnosis.clinician}
+              readOnly
+            />
+          </div>
         </div>
-        <div className="mb-4 text-left">
-          <label className="block font-semibold">Symptoms</label>
-          <textarea className="w-full p-2 border rounded-lg bg-gray-200" value={diagnosis.symptoms} readOnly />
-        </div>
-        <div className="mb-4 text-left">
-          <label className="block font-semibold">Severity</label>
-          <input className="w-full p-2 border rounded-lg bg-gray-200" value={diagnosis.severity} readOnly />
-        </div>
-        <div className="mb-4 text-left">
-          <label className="block font-semibold">Duration</label>
-          <input className="w-full p-2 border rounded-lg bg-gray-200" value={diagnosis.duration} readOnly />
-        </div>
-        <div className="mb-4 text-left">
-          <label className="block font-semibold">Progress</label>
-          <input className="w-full p-2 border rounded-lg bg-gray-200" value={diagnosis.progress} readOnly />
-        </div>
-        <div className="mb-4 text-left">
-          <label className="block font-semibold">Response</label>
-          <textarea
-            className="w-full p-2 border rounded-lg bg-white"
-            value={diagnosis.response}
-            onChange={(e) => setDiagnosis({ ...diagnosis, response: e.target.value })}
-          />
-        </div>
-        <div className="mb-4 text-left">
-          <label className="block font-semibold">Clinician Assigned</label>
-          <input className="w-full p-2 border rounded-lg bg-gray-200" value={diagnosis.clinician} readOnly />
-        </div>
+
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mt-4"
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mt-4 w-full"
+          style={{ backgroundColor: "#5680E9" }}
           onClick={handleApprove}
         >
           Approve

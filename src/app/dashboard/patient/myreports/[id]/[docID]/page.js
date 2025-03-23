@@ -37,97 +37,92 @@ export default function ProfileDoctor() {
   };
 
   if (loading) {
-    return <p className="text-center text-gray-500 mt-10">Loading...</p>;
+    return <p className="text-center text-gray-500 mt-10 text-lg">Loading...</p>;
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-[40rem] text-center">
-        <div className="flex justify-between w-full">
+    <div
+      className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center p-8"
+      style={{ backgroundImage: "url('/img/background.jpg')" }}
+    >
+      <div className="p-10 rounded-2xl shadow-2xl w-[40rem] text-black bg-white">
+        <div className="flex justify-between w-full mb-4">
           <Link href="/">
             <button className="text-2xl">⬅</button>
           </Link>
-          <h1 className="text-2xl font-bold text-gray-800">Doctor Profile</h1>
+          <h1 className="text-4xl font-bold text-gray-800 text-center">Doctor Profile</h1>
           <div></div>
         </div>
-        <form className="space-y-4 mt-4">
-          <div className="grid grid-cols-2 gap-4 text-left">
+        <form className="space-y-6 text-left">
+          <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-gray-600">Name</label>
+              <label className="block font-semibold text-lg">Name</label>
               <input
                 type="text"
-                name="name"
-                className="p-3 border rounded-lg w-full bg-gray-200"
+                className="p-3 rounded-lg text-black bg-[#E3F7FE] w-full"
                 value={doctor.name}
                 readOnly
               />
             </div>
             <div>
-              <label className="block text-gray-600">Phone</label>
+              <label className="block font-semibold text-lg">Phone</label>
               <input
                 type="text"
-                name="phone"
-                className="p-3 border rounded-lg w-full bg-gray-200"
+                className="p-3 rounded-lg text-black bg-[#E3F7FE] w-full"
                 value={doctor.phone}
                 readOnly
               />
             </div>
             <div>
-              <label className="block text-gray-600">Age</label>
+              <label className="block font-semibold text-lg">Age</label>
               <input
                 type="text"
-                name="age"
-                className="p-3 border rounded-lg w-full bg-gray-200"
+                className="p-3 rounded-lg text-black bg-[#E3F7FE] w-full"
                 value={doctor.age}
                 readOnly
               />
             </div>
             <div>
-              <label className="block text-gray-600">Medical Credentials</label>
+              <label className="block font-semibold text-lg">Medical Credentials</label>
               <input
                 type="text"
-                name="credentials"
-                className="p-3 border rounded-lg w-full bg-gray-200"
+                className="p-3 rounded-lg text-black bg-[#E3F7FE] w-full"
                 value={doctor.credentials}
                 readOnly
               />
             </div>
             <div>
-              <label className="block text-gray-600">License No.</label>
+              <label className="block font-semibold text-lg">License No.</label>
               <input
                 type="text"
-                name="license"
-                className="p-3 border rounded-lg w-full bg-gray-200"
+                className="p-3 rounded-lg text-black bg-[#E3F7FE] w-full"
                 value={doctor.license}
                 readOnly
               />
             </div>
             <div>
-              <label className="block text-gray-600">Specialization</label>
+              <label className="block font-semibold text-lg">Specialization</label>
               <input
                 type="text"
-                name="specialization"
-                className="p-3 border rounded-lg w-full bg-gray-200"
+                className="p-3 rounded-lg text-black bg-[#E3F7FE] w-full"
                 value={doctor.specialization}
                 readOnly
               />
             </div>
             <div>
-              <label className="block text-gray-600">Experience</label>
+              <label className="block font-semibold text-lg">Experience</label>
               <input
                 type="text"
-                name="experience"
-                className="p-3 border rounded-lg w-full bg-gray-200"
+                className="p-3 rounded-lg text-black bg-[#E3F7FE] w-full"
                 value={doctor.experience}
                 readOnly
               />
             </div>
             <div>
-              <label className="block text-gray-600">Ratings</label>
+              <label className="block font-semibold text-lg">Ratings</label>
               <input
                 type="text"
-                name="ratings"
-                className="p-3 border rounded-lg w-full bg-gray-200"
+                className="p-3 rounded-lg text-black bg-[#E3F7FE] w-full"
                 value={doctor.ratings}
                 readOnly
               />

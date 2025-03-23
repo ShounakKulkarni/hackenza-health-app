@@ -29,37 +29,59 @@ export default function MyDiagnosis() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-[40rem] text-center">
-        <div className="flex justify-between items-center w-full mb-6 border-b pb-4">
-          <h1 className="text-2xl font-bold text-gray-800">My Diagnosis</h1>
+    <div
+      className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center p-6"
+      style={{ backgroundImage: "url('/img/background.jpg')" }}
+    >
+      <div className="bg-[#F9FCFF] p-12 rounded-3xl shadow-2xl w-[50rem] text-center">
+        <div className="flex justify-between items-center w-full mb-6 border-b-2 border-[#E3F2FD] pb-4">
+          <h1 className="text-3xl font-bold text-[#4A5568]">My Diagnosis</h1>
         </div>
 
-        <div className="w-full">
-          <div className="grid grid-cols-3 font-semibold border-b pb-2 text-left">
-            <span>Date</span>
-            <span>Verification Status</span>
-            <span></span>
-          </div>
-          {diagnoses.length === 0 ? (
-            <p className="text-gray-500 mt-4">Loading...</p>
-          ) : (
-            diagnoses.map((diag) => (
-              <div key={diag.id} className="grid grid-cols-3 py-3 border-b text-left">
-                <span>{diag.date}</span>
-                <span className={diag.status === "Unverified" ? "text-red-500" : "text-green-500"}>
-                  {diag.status}
-                </span>
-                <Link
-                  href={`/dashboard/patient/myreports/${diag.id}`}
-                  className="text-blue-500 hover:underline text-right"
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-[#E3F2FD] text-[#4A5568]">
+              <th className="p-3 text-center">Date</th>
+              <th className="p-3 text-center">Verification Status</th>
+              <th className="p-3 text-center">View</th>
+            </tr>
+          </thead>
+          <tbody>
+            {diagnoses.length === 0 ? (
+              <tr>
+                <td colSpan="3" className="text-gray-500 p-4 text-lg text-center">
+                  Loading...
+                </td>
+              </tr>
+            ) : (
+              diagnoses.map((diag, index) => (
+                <tr
+                  key={diag.id}
+                  className={`border-b ${
+                    index % 2 === 0 ? "bg-[#F0FAFF]" : "bg-[#E3F7FE]"
+                  }`}
                 >
-                  View
-                </Link>
-              </div>
-            ))
-          )}
-        </div>
+                  <td className="p-3 text-[#4A5568] text-center">{diag.date}</td>
+                  <td
+                    className={`p-3 font-semibold text-center ${
+                      diag.status === "Unverified" ? "text-red-500" : "text-green-500"
+                    }`}
+                  >
+                    {diag.status}
+                  </td>
+                  <td className="p-3 text-center">
+                    <Link
+                      href={`/dashboard/patient/myreports/${diag.id}`}
+                      className="text-blue-500 font-semibold hover:underline"
+                    >
+                      View
+                    </Link>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );

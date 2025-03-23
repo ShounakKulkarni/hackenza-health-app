@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function ReportsHistory() {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   // Fake function to simulate backend GET request
   const fetchReportsHistory = async (doctorId) => {
@@ -28,29 +30,49 @@ export default function ReportsHistory() {
     });
   }, []);
 
-  if (loading) return <p className="text-center text-gray-500">Loading...</p>;
+  if (loading) return <p className="text-center text-gray-500 text-lg">Loading...</p>;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-      <div className="bg-white p-8 rounded-2xl shadow-xl w-[40rem] text-center">
-        <div className="flex justify-between items-center w-full mb-6 border-b pb-4">
-          <h1 className="text-2xl font-bold text-gray-800">Reports History</h1>
+    <div
+      className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center p-6"
+      style={{ backgroundImage: "url('/img/background.jpg')" }}
+    >
+      <div className="bg-[#F9FCFF] p-12 rounded-3xl shadow-2xl w-[50rem] text-center relative">
+        {/* Home Button */}
+        <button
+          className="absolute top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+          onClick={() => router.push("/dashboard/doctor")}
+        >
+          Home
+        </button>
+
+        <div className="flex justify-between items-center w-full mb-6 border-b-2 border-[#E3F2FD] pb-4">
+          <h1 className="text-3xl font-bold text-[#4A5568]">Reports History</h1>
         </div>
+        
         <table className="w-full border-collapse">
           <thead>
-            <tr className="bg-gray-300">
-              <th className="p-2 text-left">Date</th>
-              <th className="p-2 text-left">Patient Name</th>
-              <th className="p-2 text-left">Query</th>
+            <tr className="bg-[#E3F2FD] text-[#4A5568]">
+              <th className="p-3 text-center">Date</th>
+              <th className="p-3 text-center">Patient Name</th>
+              <th className="p-3 text-center">Query</th>
             </tr>
           </thead>
           <tbody>
-            {reports.map((report) => (
-              <tr key={report.id} className="border-b">
-                <td className="p-2 bg-gray-200">{report.date}</td>
-                <td className="p-2 bg-gray-200">{report.patientName}</td>
-                <td className="p-2 bg-gray-200">
-                  <Link href={`/dashboard/doctor/history/${report.id}`} className="text-blue-500">
+            {reports.map((report, index) => (
+              <tr
+                key={report.id}
+                className={`border-b ${
+                  index % 2 === 0 ? "bg-[#F0FAFF]" : "bg-[#E3F7FE]"
+                }`}
+              >
+                <td className="p-3 text-[#4A5568] text-center">{report.date}</td>
+                <td className="p-3 text-[#4A5568] text-center">{report.patientName}</td>
+                <td className="p-3 text-center">
+                  <Link
+                    href={`/dashboard/doctor/history/${report.id}`}
+                    className="text-blue-500 font-semibold hover:underline"
+                  >
                     View
                   </Link>
                 </td>

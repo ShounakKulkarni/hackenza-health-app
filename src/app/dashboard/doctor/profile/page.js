@@ -53,7 +53,10 @@ export default function ProfileDoctor() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div
+      className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: "url('/img/background.jpg')" }}
+    >
       <div className="bg-white p-8 rounded-2xl shadow-xl w-[40rem] text-center">
         <div className="flex justify-between w-full">
           <Link href="/">
@@ -70,24 +73,39 @@ export default function ProfileDoctor() {
               { label: "Age", name: "age" },
               { label: "Medical Credentials", name: "credentials" },
               { label: "License No.", name: "license" },
-              { label: "Specialization", name: "specialization" },
               { label: "Experience", name: "experience" },
-              { label: "Ratings", name: "ratings" },
             ].map((field) => (
               <div key={field.name}>
                 <label className="block text-gray-600">{field.label}</label>
                 <input
                   type="text"
                   name={field.name}
-                  className="p-3 border rounded-lg w-full"
+                  className="p-3 border border-gray-400 rounded-lg w-full text-black placeholder-gray-500"
                   onChange={handleChange}
+                  required
                 />
               </div>
             ))}
           </div>
+
+          {/* Full-width Specialization Field */}
+          <div className="text-left">
+            <label className="block text-gray-600">Specialization</label>
+            <input
+              type="text"
+              name="specialization"
+              className="p-3 border border-gray-400 rounded-lg w-full text-black placeholder-gray-500"
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          
+
           <button
             type="submit"
-            className="w-full bg-green-500 text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition"
+            className="w-full text-white py-2 rounded-lg font-semibold hover:bg-green-600 transition"
+            style={{ backgroundColor: "#5AB9EA" }}
             disabled={loading}
           >
             {loading ? "Saving..." : "Save Changes"}

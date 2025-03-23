@@ -12,7 +12,7 @@ export default function DoctorDashboard() {
     >
       <div className="bg-white p-10 rounded-2xl shadow-xl w-[50rem] text-center">
         <div className="flex justify-between items-center w-full mb-8 border-b pb-6">
-          <h1 className="text-4xl font-bold text-gray-800">Virtual <span style={{ color: "#5680E9" }}>Care</span></h1>
+          <h1 className="text-4xl font-bold text-gray-800">Virtual Care</h1>
           <button
             className="text-red-500 font-semibold hover:underline text-lg"
             onClick={() => router.push("/login")}
