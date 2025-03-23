@@ -57,9 +57,13 @@ virtualenv env
 ### 2) cd to backend folder and run the following command to install all the dependencies-
 ```
 pip install -r requirements.txt
-Working:
 
-Working:
+### 3) cd to core folder and then run the following command to start the server-
+```
+python manage.py runserver
+
+
+Working of the project:
 
 Retrieval-Augmented Generation (RAG) Pipeline Explanation
 A. Preprocessing and Embedding Generation (Indexing Phase)
@@ -170,8 +174,6 @@ These sections, when combined with your RAG pipeline explanation, provide a comp
 
 
 ```
-### 3) cd to oops folder and then run the following command to start the server-
-```
-python manage.py runserver
+
 
 ```
